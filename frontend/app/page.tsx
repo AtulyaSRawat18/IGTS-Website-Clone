@@ -26,11 +26,11 @@ export default function Home() {
           </Placard>
 
           {/* Scroll cue */}
-          <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 motion-safe:animate-bounce">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-white/50">
+          <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-white/40">
               Scroll to explore
             </p>
-            <div className="h-8 w-px bg-gradient-to-b from-gold/70 to-transparent" />
+            <div className="h-10 w-px bg-gradient-to-b from-gold/60 to-transparent motion-safe:animate-pulse" />
           </div>
         </section>
 
@@ -104,28 +104,28 @@ export default function Home() {
             <nav className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
               <Link
                 href="/blog"
-                className="rounded-full border border-gold/40 px-6 py-2.5 text-sm text-white transition hover:bg-gold hover:text-navy md:px-7 md:py-3 md:text-base"
+                className="border border-gold/30 px-6 py-2.5 text-xs uppercase tracking-[0.15em] text-white transition hover:border-gold hover:bg-gold/10 md:px-8 md:py-3 md:text-sm"
               >
                 Blog
               </Link>
 
               <Link
                 href="/members"
-                className="rounded-full border border-gold/40 px-6 py-2.5 text-sm text-white transition hover:bg-gold hover:text-navy md:px-7 md:py-3 md:text-base"
+                className="border border-gold/30 px-6 py-2.5 text-xs uppercase tracking-[0.15em] text-white transition hover:border-gold hover:bg-gold/10 md:px-8 md:py-3 md:text-sm"
               >
                 Members
               </Link>
 
               <Link
                 href="/game-lab"
-                className="rounded-full border border-gold/40 px-6 py-2.5 text-sm text-white transition hover:bg-gold hover:text-navy md:px-7 md:py-3 md:text-base"
+                className="border border-gold/30 px-6 py-2.5 text-xs uppercase tracking-[0.15em] text-white transition hover:border-gold hover:bg-gold/10 md:px-8 md:py-3 md:text-sm"
               >
                 Game Lab
               </Link>
 
               <Link
                 href="/join-us"
-                className="rounded-full bg-gold px-6 py-2.5 text-sm font-medium text-navy transition hover:bg-gold-light md:px-7 md:py-3 md:text-base"
+                className="border border-gold bg-gold px-6 py-2.5 text-xs uppercase tracking-[0.15em] font-medium text-navy transition hover:bg-gold-light md:px-8 md:py-3 md:text-sm"
               >
                 Join Us
               </Link>

@@ -29,7 +29,7 @@ function supportsWebGL() {
  * the loaded scene when you have one. */
 function StaticFallback() {
   return (
-    <div className="fixed inset-0 h-screen w-full bg-gradient-to-b from-navy via-navy to-navy-light">
+    <div className="fixed inset-0 h-screen w-full bg-gradient-to-b from-ink via-navy to-navy-light">
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
       </div>
@@ -201,8 +201,14 @@ export default function KnightScene() {
             fov: 45,
           }}
         >
-          <ambientLight intensity={2} />
-          <directionalLight position={[5, 8, 5]} intensity={3} />
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[5, 8, 5]} intensity={3.2} />
+          <directionalLight
+            position={[-6, 3, -4]}
+            intensity={0.6}
+            color="#a8842f"
+          />
+          <fog attach="fog" args={["#0a0c16", 6, 22]} />
 
           {/* Suspense lives INSIDE Canvas, around the meshes only — never
            * wrap the Canvas itself in Suspense, or resolving the GLTFs
@@ -216,6 +222,16 @@ export default function KnightScene() {
         </Canvas>
       </SceneErrorBoundary>
       <LoadingOverlay />
+      {/* Cinematic vignette — darkens edges so the placard cards and navbar
+       * always read against a controlled backdrop, regardless of what's
+       * bright in the scene beneath. */}
+      <div
+        className="pointer-events-none fixed inset-0 z-10"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 40%, rgba(5,6,12,0.75) 100%)",
+        }}
+      />
     </div>
   );
 }

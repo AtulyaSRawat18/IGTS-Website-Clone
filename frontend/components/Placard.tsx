@@ -24,7 +24,7 @@ export default function Placard({
 }) {
   return (
     <div
-      className={`relative border border-gold/25 bg-navy/50 px-8 py-10 backdrop-blur-md md:px-14 md:py-14 ${
+      className={`relative border border-gold/20 bg-ink/60 px-8 py-10 backdrop-blur-md md:px-14 md:py-14 ${
         wide ? "max-w-4xl" : "max-w-2xl"
       }`}
     >
