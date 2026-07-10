@@ -184,8 +184,7 @@ export default function KnightScene() {
   const [canRender3D, setCanRender3D] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    setCanRender3D(!isMobile && supportsWebGL());
+    setCanRender3D(supportsWebGL());
   }, []);
 
   if (canRender3D === null || canRender3D === false) {
