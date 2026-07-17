@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import { SessionProvider } from "@/lib/session/session-provider";
+import AppShell from "@/components/AppShell";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -29,12 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-navy">
-        <SessionProvider>
-          <Navbar />
-          {children}
-        </SessionProvider>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
 }
+
 
