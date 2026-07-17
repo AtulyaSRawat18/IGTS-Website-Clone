@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IGTS NSUT | Members</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;family=Source+Serif+4:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ace-card-perspective {
+            perspective: 1000px;
+        }
+        .ace-card {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s;
+            transform-style: preserve-3d;
+        }
+        .ace-card:hover {
+            transform: translateY(-20px) rotateY(10deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .ace-card.active {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #ebc166;
+        }
+        .member-grid-enter {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .member-grid-show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease-out;
+        }
+        .suit-watermark {
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#373844",
+                      "on-background": "#e1e1f0",
+                      "on-surface-variant": "#d1c5b2",
+                      "inverse-surface": "#e1e1f0",
+                      "surface-variant": "#323440",
+                      "on-primary": "#3f2e00",
+                      "background": "#11131d",
+                      "on-primary-container": "#372700",
+                      "primary-container": "#b08b36",
+                      "surface-container-highest": "#323440",
+                      "secondary-fixed-dim": "#c3c5da",
+                      "on-error": "#690005",
+                      "error": "#ffb4ab",
+                      "outline-variant": "#4e4637",
+                      "tertiary-fixed": "#ffdad8",
+                      "on-primary-fixed-variant": "#5b4300",
+                      "tertiary-fixed-dim": "#feb3b1",
+                      "surface-container": "#1d1f2a",
+                      "primary-fixed-dim": "#ebc166",
+                      "on-primary-fixed": "#261a00",
+                      "on-tertiary-fixed": "#370d0e",
+                      "on-secondary": "#2d3040",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-container": "#c27f7d",
+                      "on-secondary-fixed-variant": "#434657",
+                      "on-tertiary-container": "#491b1b",
+                      "secondary-fixed": "#e0e1f6",
+                      "surface": "#11131d",
+                      "surface-container-high": "#282934",
+                      "on-secondary-container": "#b2b4c8",
+                      "on-secondary-fixed": "#181b2a",
+                      "outline": "#9a8f7e",
+                      "primary": "#ebc166",
+                      "error-container": "#93000a",
+                      "secondary-container": "#434657",
+                      "primary-fixed": "#ffdf9e",
+                      "on-surface": "#e1e1f0",
+                      "surface-tint": "#ebc166",
+                      "surface-container-low": "#191b26",
+                      "secondary": "#c3c5da",
+                      "inverse-on-surface": "#2e303b",
+                      "surface-container-lowest": "#0c0e18",
+                      "inverse-primary": "#795900",
+                      "tertiary": "#feb3b1",
+                      "surface-dim": "#11131d",
+                      "on-tertiary-fixed-variant": "#6c3736",
+                      "on-tertiary": "#512221"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "max-width": "1280px",
+                      "margin-desktop": "64px",
+                      "unit": "4px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Playfair Display"],
+                      "label-caps": ["Inter"],
+                      "headline-xl": ["Playfair Display"],
+                      "headline-md": ["Playfair Display"],
+                      "headline-lg-mobile": ["Playfair Display"],
+                      "body-lg": ["\"Source Serif 4\""],
+                      "body-md": ["\"Source Serif 4\""]
+              },
+              "fontSize": {
+                      "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                      "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "26px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background selection:bg-primary/30 selection:text-primary">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md text-primary tracking-tighter">IGTS NSUT</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-caps text-label-caps tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Strategy</a>
+<a class="font-label-caps text-label-caps tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Diplomacy</a>
+<a class="font-label-caps text-label-caps tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Economy</a>
+<a class="font-label-caps text-label-caps tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Conflict</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="font-label-caps text-label-caps tracking-widest uppercase text-primary border-b border-primary pb-1 flex items-center gap-1 after:content-['\2666'] after:text-[8px] after:ml-1">Member Profile</button>
+<button class="font-label-caps text-label-caps tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors duration-300">Logout</button>
+</div>
+</nav>
+</header>
+<main class="pt-32 pb-24 min-h-screen">
+<!-- Hero Section -->
+<section class="max-w-max-width mx-auto px-margin-desktop mb-24 text-center">
+<div class="inline-block mb-6 opacity-40">
+<span class="text-4xl text-primary">♠ ♥ ♦ ♣</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl mb-4 text-on-background">The Society's Roster</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto italic">
+                "In the game of history, every player is an architect of destiny. Identify your peers."
+            </p>
+</section>
+<!-- Ace Cards Section -->
+<section class="max-w-max-width mx-auto px-margin-desktop mb-16 relative overflow-hidden">
+<div class="absolute -top-20 -right-20 opacity-[0.03] text-[300px] font-bold select-none rotate-12 suit-watermark">♠</div>
+<div class="absolute -bottom-20 -left-20 opacity-[0.03] text-[300px] font-bold select-none -rotate-12 suit-watermark">♣</div>
+<h3 class="font-label-caps text-label-caps text-primary mb-12 tracking-[0.25em] text-center">SELECT AN ERA</h3>
+<div class="flex flex-wrap justify-center gap-12 ace-card-perspective">
+<!-- Card 2024 -->
+<button class="ace-card w-48 h-72 bg-surface-container border border-outline-variant/30 rounded-lg flex flex-col items-center justify-between p-6 cursor-pointer hover:border-primary/50 relative group" onclick="revealYear('2024')">
+<div class="absolute top-4 left-4 flex flex-col items-center">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♠</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-6xl text-primary mb-2 opacity-80 group-hover:opacity-100 transition-opacity">♠</span>
+<span class="font-label-caps text-label-caps tracking-widest text-on-surface">MXXIV</span>
+</div>
+<div class="absolute bottom-4 right-4 flex flex-col items-center rotate-180">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♠</span>
+</div>
+<div class="absolute bottom-6 font-headline-md text-white/10 group-hover:text-primary/20 transition-colors">2024</div>
+</button>
+<!-- Card 2023 -->
+<button class="ace-card w-48 h-72 bg-surface-container border border-outline-variant/30 rounded-lg flex flex-col items-center justify-between p-6 cursor-pointer hover:border-primary/50 relative group" onclick="revealYear('2023')">
+<div class="absolute top-4 left-4 flex flex-col items-center">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♥</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-6xl text-primary mb-2 opacity-80 group-hover:opacity-100 transition-opacity">♥</span>
+<span class="font-label-caps text-label-caps tracking-widest text-on-surface">MXXIII</span>
+</div>
+<div class="absolute bottom-4 right-4 flex flex-col items-center rotate-180">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♥</span>
+</div>
+<div class="absolute bottom-6 font-headline-md text-white/10 group-hover:text-primary/20 transition-colors">2023</div>
+</button>
+<!-- Card 2022 -->
+<button class="ace-card w-48 h-72 bg-surface-container border border-outline-variant/30 rounded-lg flex flex-col items-center justify-between p-6 cursor-pointer hover:border-primary/50 relative group" onclick="revealYear('2022')">
+<div class="absolute top-4 left-4 flex flex-col items-center">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♦</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-6xl text-primary mb-2 opacity-80 group-hover:opacity-100 transition-opacity">♦</span>
+<span class="font-label-caps text-label-caps tracking-widest text-on-surface">MXXII</span>
+</div>
+<div class="absolute bottom-4 right-4 flex flex-col items-center rotate-180">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♦</span>
+</div>
+<div class="absolute bottom-6 font-headline-md text-white/10 group-hover:text-primary/20 transition-colors">2022</div>
+</button>
+<!-- Card 2021 -->
+<button class="ace-card w-48 h-72 bg-surface-container border border-outline-variant/30 rounded-lg flex flex-col items-center justify-between p-6 cursor-pointer hover:border-primary/50 relative group" onclick="revealYear('2021')">
+<div class="absolute top-4 left-4 flex flex-col items-center">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♣</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-6xl text-primary mb-2 opacity-80 group-hover:opacity-100 transition-opacity">♣</span>
+<span class="font-label-caps text-label-caps tracking-widest text-on-surface">MXXI</span>
+</div>
+<div class="absolute bottom-4 right-4 flex flex-col items-center rotate-180">
+<span class="font-headline-md text-primary">A</span>
+<span class="text-xl text-primary">♣</span>
+</div>
+<div class="absolute bottom-6 font-headline-md text-white/10 group-hover:text-primary/20 transition-colors">2021</div>
+</button>
+</div>
+</section>
+<!-- Roster Dropdown Container -->
+<section class="max-w-max-width mx-auto px-margin-desktop hidden" id="roster-container">
+<div class="py-12 border-t border-outline-variant/10">
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="font-headline-lg text-headline-lg text-primary block" id="active-year-label">Era of 2024</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-60">DISTRIBUTION OF PLAYERS</span>
+</div>
+<div class="text-right">
+<span class="material-symbols-outlined text-primary text-4xl">diversity_3</span>
+</div>
+</div>
+<!-- Bento Grid for Members -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="member-grid">
+<!-- Member Card Template -->
+<div class="bg-surface-container-low border border-outline-variant/20 p-8 relative overflow-hidden group hover:border-primary/40 transition-colors">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+<span class="text-6xl">♠</span>
+</div>
+<div class="flex items-start gap-6 mb-6">
+<div class="w-16 h-16 rounded-full overflow-hidden border border-primary/20 flex-shrink-0">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="A portrait of a sharp, intellectual man in his late 20s wearing vintage academic attire, deep blue background, cinematic low-key lighting, focused gaze, dark academia aesthetic, high-contrast portraiture." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Vikram Sethi</h4>
+<span class="font-label-caps text-label-caps text-primary">Grand Strategist</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 italic">"Optimization is not a choice; it is a necessity of the logical mind. The board is always set."</p>
+<div class="flex justify-between items-center">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">terminal</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">history_edu</span>
+</div>
+<!-- Action button - visible only for user's own entry (simulated) -->
+<button class="bg-primary/10 border border-primary/20 text-primary px-4 py-1 font-label-caps text-[10px] tracking-widest uppercase hover:bg-primary hover:text-on-primary transition-all">Edit My Profile</button>
+</div>
+</div>
+<!-- Member Card 2 -->
+<div class="bg-surface-container-low border border-outline-variant/20 p-8 relative overflow-hidden group hover:border-primary/40 transition-colors">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+<span class="text-6xl">♥</span>
+</div>
+<div class="flex items-start gap-6 mb-6">
+<div class="w-16 h-16 rounded-full overflow-hidden border border-primary/20 flex-shrink-0">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close-up portrait of a woman with sophisticated glasses, elegant dark academia styling, warm moody library background, dramatic shadows, emerald and gold color palette, professional and mysterious atmosphere." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Ananya Roy</h4>
+<span class="font-label-caps text-label-caps text-primary">Lead Diplomat</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 italic">"Coalitions are the currency of power. I trade in trust and mutual destruction."</p>
+<div class="flex justify-between items-center">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">mail</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">public</span>
+</div>
+</div>
+</div>
+<!-- Member Card 3 -->
+<div class="bg-surface-container-low border border-outline-variant/20 p-8 relative overflow-hidden group hover:border-primary/40 transition-colors">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+<span class="text-6xl">♦</span>
+</div>
+<div class="flex items-start gap-6 mb-6">
+<div class="w-16 h-16 rounded-full overflow-hidden border border-primary/20 flex-shrink-0">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="A focused man studying a ledger in a candlelit room, vintage aesthetic, heavy shadows, intricate textures of parchment and wood, warm glowing light, cinematic dark academia style, deep shadows and golden highlights." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Kabir Malhotra</h4>
+<span class="font-label-caps text-label-caps text-primary">Treasurer of Stakes</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 italic">"Every resource is a leverage point. If you aren't calculating the cost, you've already paid it."</p>
+<div class="flex justify-between items-center">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">account_balance</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">monitoring</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 max-w-max-width mx-auto gap-gutter">
+<div class="flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-primary opacity-50">IGTS NSUT</span>
+<p class="font-body-md text-body-md italic text-on-surface-variant">© 2024 Indian Game Theory Society. Every move reveals something.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline underline-offset-4" href="#">The Ledger</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline underline-offset-4" href="#">Constitutions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline underline-offset-4" href="#">Archives</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline underline-offset-4" href="#">Private Access</a>
+</div>
+</div>
+</footer>
+<script>
+        function revealYear(year) {
+            const container = document.getElementById('roster-container');
+            const label = document.getElementById('active-year-label');
+            const grid = document.getElementById('member-grid');
+            const cards = document.querySelectorAll('.ace-card');
+
+            // Remove active state from all cards
+            cards.forEach(card => card.classList.remove('active'));
+            
+            // Add active state to clicked card logic (simplified for demo)
+            event.currentTarget.classList.add('active');
+
+            // Update label
+            label.innerText = `Era of ${year}`;
+
+            // Show container with animation
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                container.style.opacity = '0';
+                setTimeout(() => {
+                    container.style.transition = 'opacity 0.8s ease-in-out';
+                    container.style.opacity = '1';
+                }, 10);
+            }
+
+            // Simple "refresh" animation for grid items
+            const items = grid.children;
+            for (let i = 0; i < items.length; i++) {
+                items[i].style.opacity = '0';
+                items[i].style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    items[i].style.transition = 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                    items[i].style.opacity = '1';
+                    items[i].style.transform = 'translateY(0)';
+                }, 100 * (i + 1));
+            }
+
+            // Scroll into view
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+
+        // Atmosphere interaction: Mouse tracking for subtle glow
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.createElement('div');
+            // This would be a more complex implementation for a full site, 
+            // but we can add a subtle CSS variable for the active card hover effects
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            document.body.style.setProperty('--mouse-x', `${x}%`);
+            document.body.style.setProperty('--mouse-y', `${y}%`);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,22 @@
+{
+    "name":  "igts-backend",
+    "version":  "0.2.0",
+    "private":  true,
+    "description":  "Content API backend for the IGTS website.",
+    "main":  "app.js",
+    "type":  "commonjs",
+    "scripts":  {
+                    "dev":  "node --watch app.js",
+                    "start":  "node app.js",
+                    "check":  "node --check app.js"
+                },
+    "dependencies":  {
+                         "cors":  "^2.8.5",
+                         "dotenv":  "^16.4.5",
+                         "express":  "^4.18.3",
+                         "mongoose":  "^8.9.5"
+                     },
+    "devDependencies":  {
+
+                        }
+}

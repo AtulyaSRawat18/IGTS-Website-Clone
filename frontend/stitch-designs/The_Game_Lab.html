@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IGTS Game Lab | Interactive Experiments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;family=Source+Serif+4:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#373844",
+                    "on-background": "#e1e1f0",
+                    "on-surface-variant": "#d1c5b2",
+                    "inverse-surface": "#e1e1f0",
+                    "surface-variant": "#323440",
+                    "on-primary": "#3f2e00",
+                    "background": "#11131d",
+                    "on-primary-container": "#372700",
+                    "primary-container": "#b08b36",
+                    "surface-container-highest": "#323440",
+                    "secondary-fixed-dim": "#c3c5da",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "outline-variant": "#4e4637",
+                    "tertiary-fixed": "#ffdad8",
+                    "on-primary-fixed-variant": "#5b4300",
+                    "tertiary-fixed-dim": "#feb3b1",
+                    "surface-container": "#1d1f2a",
+                    "primary-container": "#b08b36",
+                    "primary": "#ebc166",
+                    "on-surface": "#e1e1f0",
+                    "surface-container-low": "#191b26",
+                    "surface-container-lowest": "#0c0e18",
+                    "outline": "#9a8f7e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "margin-desktop": "64px",
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "label-caps": ["Inter"],
+                    "headline-xl": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "body-md": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "26px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #11131d;
+            color: #e1e1f0;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(29, 31, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(154, 143, 126, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(235, 193, 102, 0.4);
+            box-shadow: 0 0 30px rgba(235, 193, 102, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .suit-watermark {
+            pointer-events: none;
+            opacity: 0.05;
+            position: absolute;
+            z-index: 0;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #11131d;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ebc166;
+        }
+
+        .gold-glow-hover:hover {
+            box-shadow: 0 0 20px rgba(235, 193, 102, 0.15);
+        }
+    </style>
+</head>
+<body class="font-body-md selection:bg-primary/30">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
+<div class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md text-primary tracking-tighter">IGTS NSUT</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Strategy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Diplomacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Economy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Conflict</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-all font-label-caps text-label-caps tracking-widest uppercase underline underline-offset-8">Member Profile</button>
+<span class="material-symbols-outlined text-primary cursor-pointer">logout</span>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto relative">
+<!-- Background Elements -->
+<div class="suit-watermark top-40 right-10 text-[20rem]">♦</div>
+<div class="suit-watermark bottom-20 left-10 text-[15rem]">♣</div>
+<!-- Header Section -->
+<header class="mb-16 relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-outline-variant/20 pb-8">
+<div>
+<div class="flex items-center gap-2 text-primary mb-2">
+<span class="material-symbols-outlined text-[18px]">science</span>
+<span class="font-label-caps text-label-caps tracking-[0.2em] uppercase">The Laboratory</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-4">Interactive Experiments</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl italic">
+                        "Every move reveals something." Explore the computational limits of strategic thought through our curated catalog of game-theoretic simulations.
+                    </p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 font-label-caps text-label-caps tracking-widest uppercase gold-glow-hover transition-all">
+<span class="material-symbols-outlined">add</span>
+                        Add Game
+                    </button>
+</div>
+</div>
+</header>
+<!-- Filters Section -->
+<section class="flex flex-wrap items-center justify-between gap-6 mb-12 relative z-10">
+<div class="flex flex-wrap items-center gap-8">
+<div class="group relative">
+<label class="block font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 opacity-60">Difficulty</label>
+<div class="flex gap-4">
+<button class="px-4 py-1 border border-primary text-primary font-label-sm text-label-sm uppercase tracking-tighter bg-primary/5">All Levels</button>
+<button class="px-4 py-1 border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-tighter hover:border-primary transition-all">Novice</button>
+<button class="px-4 py-1 border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-tighter hover:border-primary transition-all">Strategist</button>
+<button class="px-4 py-1 border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-tighter hover:border-primary transition-all">Grandmaster</button>
+</div>
+</div>
+<div class="group relative">
+<label class="block font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 opacity-60">Domain</label>
+<select class="bg-transparent border-b border-outline-variant/40 text-on-surface focus:outline-none focus:border-primary py-1 pr-8 appearance-none cursor-pointer font-body-md">
+<option value="all">All Domains</option>
+<option value="zero-sum">Zero-Sum Games</option>
+<option value="cooperative">Cooperative Dynamics</option>
+<option value="evolutionary">Evolutionary Theory</option>
+<option value="auction">Auction Theory</option>
+</select>
+</div>
+</div>
+<div class="relative min-w-[300px]">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-primary/50">search</span>
+<input class="w-full bg-transparent border-b border-outline-variant/40 py-2 pl-8 focus:outline-none focus:border-primary font-body-md text-on-surface placeholder:text-on-surface-variant/40" placeholder="Filter by keyword..." type="text"/>
+</div>
+</section>
+<!-- Grid of Game Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter relative z-10">
+<!-- Game Card 1 -->
+<div class="glass-card flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A cinematic, low-light photograph of a vintage chess set made of dark obsidian and gold-plated metal. The board sits on a polished mahogany table in a dark academia library. Soft, warm spotlighting creates dramatic shadows and highlights the geometric precision of the pieces. The overall mood is mysterious, intellectual, and high-stakes." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 px-3 py-1 border border-primary text-primary bg-background/80 backdrop-blur-md font-label-sm text-label-sm uppercase">
+                        ♦ Grandmaster
+                    </div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[16px]">account_balance</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">Zero-Sum Domain</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">The Nash Equilibrium</h3>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-8">
+                        Simulate competitive scenarios where no player can benefit by changing strategy while others remain unchanged.
+                    </p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">2.4k Players</span>
+<button class="text-primary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                            Initialize <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Game Card 2 -->
+<div class="glass-card flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An abstract visualization of a prisoner's dilemma, depicted as two glowing geometric silhouettes of figures separated by a grid of golden light bars. The background is a deep navy blue, mimicking a high-end digital ledger. The lighting is cold and clinical, with sharp neon gold accents representing data flow and strategic decisions. Atmospheric noir aesthetic." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 px-3 py-1 border border-primary text-primary bg-background/80 backdrop-blur-md font-label-sm text-label-sm uppercase">
+                        ♥ Strategist
+                    </div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[16px]">handshake</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">Cooperative Dynamics</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Prisoner's Dilemma</h3>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-8">
+                        The fundamental problem of cooperation. Will you betray for personal gain or collaborate for mutual benefit?
+                    </p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">8.1k Players</span>
+<button class="text-primary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                            Initialize <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Game Card 3 -->
+<div class="glass-card flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A macro shot of a complex mechanical clockwork mechanism with golden gears and dark steel springs. The aesthetic is industrial yet refined, like a high-end watch movement. The lighting captures the metallic textures of the brass and iron. The image represents complex systems and time-based strategies in game theory. Dark navy background with warm amber highlights." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 px-3 py-1 border border-primary text-primary bg-background/80 backdrop-blur-md font-label-sm text-label-sm uppercase">
+                        ♠ Novice
+                    </div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[16px]">trending_up</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">Evolutionary Theory</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Darwin's Gambit</h3>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-8">
+                        Observe how strategies evolve over generations. Survival of the fittest applied to pure mathematical logic.
+                    </p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">1.2k Players</span>
+<button class="text-primary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                            Initialize <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Game Card 4 -->
+<div class="glass-card flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An artistic representation of a high-end auction house, with a glowing golden gavel striking a dark stone pedestal. Fragments of light scatter like crystalline data. The scene is set in a shadowy, upscale environment with velvet textures and gold-trimmed architecture. Cinematic lighting emphasizes the tension of a high-stakes bid. Dark academia luxury aesthetic." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 px-3 py-1 border border-primary text-primary bg-background/80 backdrop-blur-md font-label-sm text-label-sm uppercase">
+                        ♦ Grandmaster
+                    </div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[16px]">gavel</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">Auction Theory</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">The Vickrey Protocol</h3>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-8">
+                        A sealed-bid auction experiment where truth-telling is a dominant strategy. Navigate the complexities of value and stakes.
+                    </p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">540 Players</span>
+<button class="text-primary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                            Initialize <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Game Card 5 -->
+<div class="glass-card flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A dark, moody bird's eye view of a labyrinth or maze constructed from dark gray granite with golden light flowing through its paths like liquid. The lighting is dim, highlighting only the intricate geometry of the maze. The mood is one of calculation and mystery. Deep navy shadows and sharp, warm gold highlights. Professional cinematic art." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 px-3 py-1 border border-primary text-primary bg-background/80 backdrop-blur-md font-label-sm text-label-sm uppercase">
+                        ♣ Strategist
+                    </div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[16px]">psychology</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">Tactics Domain</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Minimax Maze</h3>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-8">
+                        Predict opponent moves five steps ahead in this spatial logic simulation. Minimize the maximum loss in every turn.
+                    </p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">3.7k Players</span>
+<button class="text-primary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                            Initialize <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Game Card 6 -->
+<div class="glass-card flex flex-col h-full group">
+<div class="relative h-56 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A stylized digital representation of a stag hunt, using elegant gold line art of stags and hares against a textured dark blue-black parchment background. The aesthetic is inspired by ancient manuscripts combined with modern minimalist data visualization. Soft volumetric lighting creates depth and focuses on the central conflict between safety and high reward." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 px-3 py-1 border border-primary text-primary bg-background/80 backdrop-blur-md font-label-sm text-label-sm uppercase">
+                        ♥ Novice
+                    </div>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[16px]">groups</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">Diplomacy Domain</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Stag Hunt Paradox</h3>
+<p class="font-body-md text-body-md text-on-surface-variant italic mb-8">
+                        Explore trust and social contract theory. Will you hunt the stag together or settle for the lone hare?
+                    </p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">6.8k Players</span>
+<button class="text-primary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2 hover:gap-4 transition-all">
+                            Initialize <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Section -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 max-w-max-width mx-auto gap-gutter">
+<div class="font-label-caps text-label-caps text-primary opacity-50">IGTS NSUT / LAB</div>
+<p class="font-body-md text-body-md italic text-on-surface-variant text-center md:text-left">
+                © 2024 Indian Game Theory Society. Every move reveals something.
+            </p>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-all underline underline-offset-4 font-body-md text-body-md" href="#">The Ledger</a>
+<a class="text-on-surface-variant hover:text-primary transition-all underline underline-offset-4 font-body-md text-body-md" href="#">Constitutions</a>
+<a class="text-on-surface-variant hover:text-primary transition-all underline underline-offset-4 font-body-md text-body-md" href="#">Archives</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for filter buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.classList.contains('border-outline-variant/30')) {
+                    document.querySelectorAll('button').forEach(b => {
+                        b.classList.replace('border-primary', 'border-outline-variant/30');
+                        b.classList.replace('text-primary', 'text-on-surface-variant');
+                        b.classList.remove('bg-primary/5');
+                    });
+                    this.classList.replace('border-outline-variant/30', 'border-primary');
+                    this.classList.replace('text-on-surface-variant', 'text-primary');
+                    this.classList.add('bg-primary/5');
+                }
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.querySelector('.material-symbols-outlined').style.color = '#ebc166';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.querySelector('.material-symbols-outlined').style.color = 'rgba(235, 193, 102, 0.5)';
+        });
+    </script>
+</body></html>

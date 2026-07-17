@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react-hooks/immutability */
+
 import {
   Component,
   Suspense,
@@ -38,7 +40,7 @@ function StaticFallback() {
 }
 
 /** Lives OUTSIDE the Canvas as a plain DOM overlay. Reads load progress via
- * drei's global loading manager (useProgress) — this never touches the
+ * drei's global loading manager (useProgress) ??? this never touches the
  * Canvas's mount state, so it can't trigger a remount/context loss like a
  * Suspense-wrapped-Canvas would. Fades itself out once loading completes. */
 function LoadingOverlay() {
@@ -209,7 +211,7 @@ export default function KnightScene() {
           />
           <fog attach="fog" args={["#0a0c16", 6, 22]} />
 
-          {/* Suspense lives INSIDE Canvas, around the meshes only — never
+          {/* Suspense lives INSIDE Canvas, around the meshes only ??? never
            * wrap the Canvas itself in Suspense, or resolving the GLTFs
            * remounts the whole canvas and can crash the WebGL context. */}
           <Suspense fallback={null}>
@@ -221,7 +223,7 @@ export default function KnightScene() {
         </Canvas>
       </SceneErrorBoundary>
       <LoadingOverlay />
-      {/* Cinematic vignette — darkens edges so the placard cards and navbar
+      {/* Cinematic vignette ??? darkens edges so the placard cards and navbar
        * always read against a controlled backdrop, regardless of what's
        * bright in the scene beneath. */}
       <div
@@ -234,3 +236,5 @@ export default function KnightScene() {
     </div>
   );
 }
+
+
