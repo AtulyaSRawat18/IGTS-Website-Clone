@@ -23,6 +23,9 @@ export async function getMe() {
 export async function logout() {
   try {
     await apiFetch<{ message: string }>("/api/auth/logout", { method: "POST" });
+  } catch {
+    // Logging out is intentionally client-idempotent: even if the backend
+    // cannot delete the server session, the local token must be cleared.
   } finally {
     clearStoredToken();
   }
