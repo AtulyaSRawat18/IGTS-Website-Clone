@@ -22,7 +22,6 @@ const GameSchema = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now },
 });
 
-GameSchema.index({ slug: 1 });
 GameSchema.index({ is_active: 1, game_type: 1 });
 
 module.exports = mongoose.model("Game", GameSchema);

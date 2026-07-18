@@ -32,7 +32,6 @@ const BlogSchema = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now },
 });
 
-BlogSchema.index({ slug: 1 });
 BlogSchema.index({ status: 1, category: 1 });
 BlogSchema.index({ "author.user_id": 1 });
 

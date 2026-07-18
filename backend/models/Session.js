@@ -8,7 +8,6 @@ const SessionSchema = new mongoose.Schema({
   expires_at: { type: Date, required: true },
 });
 
-SessionSchema.index({ token: 1 });
 SessionSchema.index({ expires_at: 1 }, { expireAfterSeconds: 0 });
 
 module.exports = mongoose.model("Session", SessionSchema);
