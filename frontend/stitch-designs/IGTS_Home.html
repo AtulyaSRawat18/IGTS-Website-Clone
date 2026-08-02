@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IGTS NSUT | The Grand Strategy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,600;1,400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
+
+        :root {
+            --antique-gold-20: rgba(235, 193, 102, 0.2);
+        }
+
+        body {
+            background-color: #11131d;
+            color: #e1e1f0;
+            overflow-x: hidden;
+        }
+
+        .snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .snap-section {
+            height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .placard-frame {
+            border: 1px solid var(--antique-gold-20);
+            background: rgba(17, 19, 29, 0.7);
+            backdrop-filter: blur(12px);
+            position: relative;
+        }
+
+        .placard-frame::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid rgba(235, 193, 102, 0.05);
+            pointer-events: none;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Suit watermark decorations */
+        .suit-watermark {
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.03;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .glass-nav {
+            background: rgba(17, 19, 29, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#373844",
+                    "on-background": "#e1e1f0",
+                    "on-surface-variant": "#d1c5b2",
+                    "inverse-surface": "#e1e1f0",
+                    "surface-variant": "#323440",
+                    "on-primary": "#3f2e00",
+                    "background": "#11131d",
+                    "on-primary-container": "#372700",
+                    "primary-container": "#b08b36",
+                    "surface-container-highest": "#323440",
+                    "secondary-fixed-dim": "#c3c5da",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "outline-variant": "#4e4637",
+                    "tertiary-fixed": "#ffdad8",
+                    "on-primary-fixed-variant": "#5b4300",
+                    "tertiary-fixed-dim": "#feb3b1",
+                    "surface-container": "#1d1f2a",
+                    "primary-container": "#b08b36",
+                    "primary-fixed-dim": "#ebc166",
+                    "on-primary-fixed": "#261a00",
+                    "on-tertiary-fixed": "#370d0e",
+                    "on-secondary": "#2d3040",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#c27f7d",
+                    "on-secondary-fixed-variant": "#434657",
+                    "on-tertiary-container": "#491b1b",
+                    "secondary-fixed": "#e0e1f6",
+                    "surface": "#11131d",
+                    "surface-container-high": "#282934",
+                    "on-secondary-container": "#b2b4c8",
+                    "on-secondary-fixed": "#181b2a",
+                    "outline": "#9a8f7e",
+                    "primary": "#ebc166",
+                    "error-container": "#93000a",
+                    "secondary-container": "#434657",
+                    "primary-fixed": "#ffdf9e",
+                    "on-surface": "#e1e1f0",
+                    "surface-tint": "#ebc166",
+                    "surface-container-low": "#191b26",
+                    "secondary": "#c3c5da",
+                    "inverse-on-surface": "#2e303b",
+                    "surface-container-lowest": "#0c0e18",
+                    "inverse-primary": "#795900",
+                    "tertiary": "#feb3b1",
+                    "surface-dim": "#11131d",
+                    "on-tertiary-fixed-variant": "#6c3736",
+                    "on-tertiary": "#512221"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "max-width": "1280px",
+                    "margin-desktop": "64px",
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "label-caps": ["Inter"],
+                    "headline-xl": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "body-lg": ["\"Source Serif 4\""],
+                    "body-md": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "26px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background selection:bg-primary/30">
+<!-- Background Engine -->
+<div class="fixed inset-0 z-0">
+
+<!-- Overlay Gradient for legibility -->
+<div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none"></div>
+</div>
+<!-- Navigation Shell -->
+<header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-outline-variant/20">
+<div class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter uppercase">IGTS NSUT</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary border-b border-primary pb-1 flex items-center gap-1 after:content-['\2666'] after:text-[8px] after:ml-1 font-label-caps text-label-caps tracking-widest uppercase" href="#strategy">Strategy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#diplomacy">Diplomacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#economy">Economy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#conflict">Conflict</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="font-label-caps text-label-caps tracking-widest uppercase text-on-surface-variant hover:text-primary transition-all">Member Profile</button>
+<button class="px-6 py-2 bg-primary text-on-primary font-label-caps text-label-caps tracking-widest uppercase hover:bg-primary-fixed-dim transition-all active:scale-95">Logout</button>
+</div>
+</div>
+</header>
+<main class="snap-container relative z-10">
+<!-- Section 1: Hero -->
+<section class="snap-section" id="hero">
+<div class="suit-watermark top-20 right-20">♠</div>
+<div class="max-w-4xl px-margin-mobile md:px-0 text-center">
+<div class="placard-frame p-12 md:p-20 flex flex-col items-center">
+<span class="font-label-caps text-label-caps text-primary tracking-[0.3em] uppercase mb-6 block">Est. 2024</span>
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-8 leading-none">The Great Game Begins</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl italic mb-12">
+                        Step into a realm where intellect is the only currency and every decision echoes through the halls of history. Join the Indian Game Theory Society.
+                    </p>
+<a class="group relative px-10 py-5 border border-primary text-primary font-label-caps text-label-caps tracking-[0.2em] uppercase overflow-hidden transition-all hover:text-on-primary" href="#strategy">
+<span class="relative z-10">Enter the Chamber</span>
+<div class="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+</a>
+</div>
+</div>
+</section>
+<!-- Section 2: Strategy -->
+<section class="snap-section" id="strategy">
+<div class="suit-watermark bottom-20 left-20">♠</div>
+<div class="w-full max-w-6xl px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+<div class="placard-frame p-10 md:p-16">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">chess_pawn</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">The Art of Strategy</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 leading-relaxed">
+                        Pure logic distilled. We analyze the mathematical underpinnings of decision-making, from Nash Equilibria to Zero-Sum dynamics. In this chamber, we don't just play the game; we solve it.
+                    </p>
+<div class="flex gap-4">
+<div class="px-4 py-2 bg-surface-container-high border border-outline-variant/30 font-label-sm text-label-sm text-primary">NASH EQUILIBRIUM</div>
+<div class="px-4 py-2 bg-surface-container-high border border-outline-variant/30 font-label-sm text-label-sm text-primary">MINIMAX</div>
+</div>
+</div>
+<div class="hidden md:block">
+<img class="w-full aspect-square object-cover border border-outline-variant/20 shadow-2xl" data-alt="A macro cinematic shot of a heavy, obsidian chess piece on a glass board. The lighting is low and moody, featuring sharp rim lights in antique gold. Dark academia library background with blurred bookshelves and a dusting of fine particles in the air. 8k resolution, photorealistic." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- Section 3: Diplomacy -->
+<section class="snap-section" id="diplomacy">
+<div class="suit-watermark top-1/4 right-1/4">♥</div>
+<div class="w-full max-w-6xl px-margin-desktop grid md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1 hidden md:block">
+<img class="w-full aspect-video object-cover border border-outline-variant/20" data-alt="A top-down view of an ancient mahogany table with scattered wax-sealed envelopes, a fountain pen, and a crystal glass of amber liquid. Soft, warm candlelight creates long shadows. The scene feels like a private cabinet meeting in a colonial-era study. Cinematic noir aesthetic, deep blues and rich wood tones." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="placard-frame p-10 md:p-16 order-1 md:order-2">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">handshake</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Silent Diplomacy</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 leading-relaxed">
+                        The human element of the equation. Master the dance of alliances, the weight of trust, and the calculated cost of betrayal. Every word is a move, every silence a strategy.
+                    </p>
+<ul class="space-y-4 font-label-caps text-label-caps text-on-surface-variant">
+<li class="flex items-center gap-3"><span class="text-primary">♦</span> Coalition Building</li>
+<li class="flex items-center gap-3"><span class="text-primary">♦</span> Signaling Theory</li>
+<li class="flex items-center gap-3"><span class="text-primary">♦</span> Cooperative Outcomes</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Section 4: Economy -->
+<section class="snap-section" id="economy">
+<div class="suit-watermark bottom-1/4 right-20">♦</div>
+<div class="w-full max-w-4xl px-margin-desktop">
+<div class="placard-frame p-12 md:p-20 text-center relative overflow-hidden">
+<!-- Ledger detail decoration -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+<span class="font-label-caps text-label-caps text-primary mb-6 block">Market Dynamics</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-8">The Economic Ledger</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-12 max-w-2xl mx-auto italic">
+                        "The market is a voting machine in the short run, but a weighing machine in the long run." Explore the mechanics of resource allocation and market efficiency through the lens of competition.
+                    </p>
+<div class="grid grid-cols-3 gap-8">
+<div class="text-center">
+<div class="font-label-caps text-[24px] text-primary mb-1">94.2</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-50">STABILITY INDEX</div>
+</div>
+<div class="text-center">
+<div class="font-label-caps text-[24px] text-primary mb-1">0.68</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-50">GINI COEFFICIENT</div>
+</div>
+<div class="text-center">
+<div class="font-label-caps text-[24px] text-primary mb-1">12.4k</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant opacity-50">TOTAL ASSETS</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Conflict -->
+<section class="snap-section" id="conflict">
+<div class="suit-watermark top-20 left-20">♣</div>
+<div class="w-full max-w-6xl px-margin-desktop flex flex-col md:flex-row gap-12">
+<div class="flex-1 placard-frame p-10 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Tactical Friction</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">When negotiations fail, structure remains. We study the geometry of conflict—from trench warfare to cyber-dominance.</p>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SCENARIO: OMEGA</span>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+</div>
+<div class="flex-1 placard-frame p-10 flex flex-col justify-between bg-surface-container-lowest/50">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4">Conflict Resolution</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">The endgame is always peace. Understanding the incentives for de-escalation is the highest form of strategic mastery.</p>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">ACTIVE PROTOCOLS</span>
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Footer/Call to Action -->
+<section class="snap-section" id="access">
+<div class="w-full max-w-max-width mx-auto px-margin-desktop h-full flex flex-col">
+<div class="flex-grow flex items-center justify-center">
+<div class="text-center">
+<h2 class="font-headline-xl text-headline-xl text-on-background mb-6">Final Move</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12">The ledger remains open. Will your name be etched in gold or shadow?</p>
+<div class="flex flex-col md:flex-row gap-6 justify-center">
+<button class="px-12 py-6 bg-primary text-on-primary font-label-caps text-label-caps tracking-[0.25em] uppercase hover:shadow-[0_0_30px_rgba(235,193,102,0.3)] transition-all">Request Membership</button>
+<button class="px-12 py-6 border border-outline-variant text-on-surface-variant font-label-caps text-label-caps tracking-[0.25em] uppercase hover:border-primary hover:text-primary transition-all">Review The Archives</button>
+</div>
+</div>
+</div>
+<!-- Footer Component Implementation -->
+<footer class="w-full py-12 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="font-label-caps text-label-caps text-primary opacity-50 uppercase tracking-widest">IGTS NSUT</div>
+<p class="font-body-md text-body-md italic text-on-surface-variant text-center md:text-left">
+                        © 2024 Indian Game Theory Society. Every move reveals something.
+                    </p>
+<nav class="flex gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline underline-offset-4" href="#">The Ledger</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline underline-offset-4" href="#">Constitutions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all underline underline-offset-4" href="#">Archives</a>
+</nav>
+</footer>
+</div>
+</section>
+</main>
+<!-- Side Navigation Indicator -->
+<div class="fixed right-12 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-6">
+<a class="w-2 h-2 rounded-full bg-primary ring-4 ring-primary/10" href="#hero"></a>
+<a class="w-1.5 h-1.5 rounded-full bg-outline-variant hover:bg-primary transition-all" href="#strategy"></a>
+<a class="w-1.5 h-1.5 rounded-full bg-outline-variant hover:bg-primary transition-all" href="#diplomacy"></a>
+<a class="w-1.5 h-1.5 rounded-full bg-outline-variant hover:bg-primary transition-all" href="#economy"></a>
+<a class="w-1.5 h-1.5 rounded-full bg-outline-variant hover:bg-primary transition-all" href="#conflict"></a>
+<a class="w-1.5 h-1.5 rounded-full bg-outline-variant hover:bg-primary transition-all" href="#access"></a>
+</div>
+<script>
+        // Simple intersection observer to update the side indicator
+        const sections = document.querySelectorAll('.snap-section');
+        const indicators = document.querySelectorAll('.fixed.right-12 a');
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    indicators.forEach(indicator => {
+                        const href = indicator.getAttribute('href').substring(1);
+                        if (href === id) {
+                            indicator.classList.remove('w-1.5', 'h-1.5', 'bg-outline-variant');
+                            indicator.classList.add('w-2', 'h-2', 'bg-primary', 'ring-4', 'ring-primary/10');
+                        } else {
+                            indicator.classList.add('w-1.5', 'h-1.5', 'bg-outline-variant');
+                            indicator.classList.remove('w-2', 'h-2', 'bg-primary', 'ring-4', 'ring-primary/10');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Smooth interaction on scroll for glass header
+        const header = document.querySelector('header');
+        document.querySelector('.snap-container').addEventListener('scroll', (e) => {
+            if (e.target.scrollTop > 50) {
+                header.classList.add('py-4');
+                header.classList.remove('py-6');
+            } else {
+                header.classList.add('py-6');
+                header.classList.remove('py-4');
+            }
+        });
+    </script>
+</body></html>

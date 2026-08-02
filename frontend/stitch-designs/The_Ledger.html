@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Ledger | IGTS NSUT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;family=Source+Serif+4:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #11131d;
+            color: #e1e1f0;
+            scroll-behavior: smooth;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .placard-card {
+            transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), border-color 0.4s ease;
+        }
+        
+        .placard-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(235, 193, 102, 0.4);
+        }
+
+        .diamond-divider::after {
+            content: '♦';
+            font-size: 8px;
+            color: #ebc166;
+            margin: 0 12px;
+        }
+
+        .filter-chip.active {
+            color: #ebc166;
+            border-bottom: 1px solid #ebc166;
+        }
+
+        /* Custom scrollbar for Dark Academia feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0c0e18;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #323440;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ebc166;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#373844",
+                        "on-background": "#e1e1f0",
+                        "on-surface-variant": "#d1c5b2",
+                        "inverse-surface": "#e1e1f0",
+                        "surface-variant": "#323440",
+                        "on-primary": "#3f2e00",
+                        "background": "#11131d",
+                        "on-primary-container": "#372700",
+                        "primary-container": "#b08b36",
+                        "surface-container-highest": "#323440",
+                        "secondary-fixed-dim": "#c3c5da",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#4e4637",
+                        "tertiary-fixed": "#ffdad8",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "tertiary-fixed-dim": "#feb3b1",
+                        "surface-container": "#1d1f2a",
+                        "primary-fixed-dim": "#ebc166",
+                        "on-primary-fixed": "#261a00",
+                        "on-tertiary-fixed": "#370d0e",
+                        "on-secondary": "#2d3040",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#c27f7d",
+                        "on-secondary-fixed-variant": "#434657",
+                        "on-tertiary-container": "#491b1b",
+                        "secondary-fixed": "#e0e1f6",
+                        "surface": "#11131d",
+                        "surface-container-high": "#282934",
+                        "on-secondary-container": "#b2b4c8",
+                        "on-secondary-fixed": "#181b2a",
+                        "outline": "#9a8f7e",
+                        "primary": "#ebc166",
+                        "error-container": "#93000a",
+                        "secondary-container": "#434657",
+                        "primary-fixed": "#ffdf9e",
+                        "on-surface": "#e1e1f0",
+                        "surface-tint": "#ebc166",
+                        "surface-container-low": "#191b26",
+                        "secondary": "#c3c5da",
+                        "inverse-on-surface": "#2e303b",
+                        "surface-container-lowest": "#0c0e18",
+                        "inverse-primary": "#795900",
+                        "tertiary": "#feb3b1",
+                        "surface-dim": "#11131d",
+                        "on-tertiary-fixed-variant": "#6c3736",
+                        "on-tertiary": "#512221"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "max-width": "1280px",
+                        "margin-desktop": "64px",
+                        "unit": "4px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["\"Source Serif 4\""],
+                        "body-md": ["\"Source Serif 4\""]
+                    },
+                    "fontSize": {
+                        "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["20px", {"lineHeight": "32px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "26px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-max-width mx-auto">
+<div class="font-headline-md text-headline-md text-primary tracking-tighter">IGTS NSUT</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Strategy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Diplomacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Economy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-caps text-label-caps tracking-widest uppercase" href="#">Conflict</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all uppercase tracking-widest">Member Profile</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A refined circular crest of the Indian Game Theory Society featuring a golden diamond and compass overlaying a dark blue textured shield. The style is classic and academic, with subtle metallic sheen and deep shadows, reflecting a high-stakes intellectual environment." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</nav>
+</header>
+<main class="min-h-screen relative">
+<!-- Hero Section -->
+<section class="pt-24 pb-16 px-margin-desktop max-w-max-width mx-auto text-center border-b border-outline-variant/10">
+<div class="inline-flex items-center gap-2 mb-6 opacity-60">
+<span class="font-label-caps text-label-caps tracking-[0.3em] uppercase">Archive No. 042</span>
+<span class="text-[8px]">♦</span>
+<span class="font-label-caps text-label-caps tracking-[0.3em] uppercase">Private Access</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-8 max-w-4xl mx-auto italic">The Ledger</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto opacity-80">
+                A meticulous documentation of strategic shifts, geopolitical maneuvers, and the mathematical beauty of human conflict. Every move recorded. Every move analyzed.
+            </p>
+</section>
+<!-- Category Bar -->
+<section class="sticky top-[89px] z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant/10">
+<div class="max-w-max-width mx-auto px-margin-desktop py-4 flex justify-center gap-12 overflow-x-auto no-scrollbar">
+<button class="filter-chip active font-label-caps text-label-caps tracking-widest uppercase pb-1 transition-all duration-300">All Entries</button>
+<button class="filter-chip text-on-surface-variant hover:text-primary font-label-caps text-label-caps tracking-widest uppercase pb-1 transition-all duration-300">Game Theories</button>
+<button class="filter-chip text-on-surface-variant hover:text-primary font-label-caps text-label-caps tracking-widest uppercase pb-1 transition-all duration-300">Games</button>
+<button class="filter-chip text-on-surface-variant hover:text-primary font-label-caps text-label-caps tracking-widest uppercase pb-1 transition-all duration-300">State of the Art</button>
+</div>
+</section>
+<!-- Article Feed -->
+<section class="max-w-max-width mx-auto px-margin-desktop py-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-gutter gap-y-16">
+<!-- Placard Card 1 -->
+<article class="placard-card group flex flex-col border border-outline-variant/10 p-1 bg-surface-container-lowest">
+<div class="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-contrast cinematic shot of a mahogany chess board with a single golden queen standing amidst fallen obsidian pieces. The lighting is low and dramatic, casting long shadows across the grain of the wood. The mood is one of quiet victory and intense strategic focus, fitting a dark academia aesthetic." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 bg-background/80 backdrop-blur-md p-2 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">padel</span>
+</div>
+</div>
+<div class="p-8 flex flex-col h-full bg-surface-container-low border-t border-outline-variant/10">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Strategy</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-50">12 Oct 2024</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background mb-4 leading-tight">The Nash Equilibrium in Modern Diplomacy</h2>
+<p class="font-label-sm text-label-sm font-normal text-on-surface-variant/70 leading-relaxed mb-6 flex-grow">
+                            Analyzing how zero-sum frameworks are being rewritten in the age of digital transparency and non-linear warfare.
+                        </p>
+<div class="flex items-center gap-4 pt-4 border-t border-outline-variant/10">
+<div class="w-6 h-6 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="font-label-sm text-label-sm text-primary">V</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant italic">Vikram S. Rathore</span>
+</div>
+</div>
+</article>
+<!-- Placard Card 2 -->
+<article class="placard-card group flex flex-col border border-outline-variant/10 p-1 bg-surface-container-lowest">
+<div class="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close-up of a vintage fountain pen resting on a handwritten leather-bound ledger. The ink is dark blue, and the paper is aged parchment. Soft candle light illuminates the scene from the side, creating a warm, scholarly atmosphere typical of a private library. The colors are muted golds and deep browns." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 bg-background/80 backdrop-blur-md p-2 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="p-8 flex flex-col h-full bg-surface-container-low border-t border-outline-variant/10">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Diplomacy</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-50">08 Oct 2024</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background mb-4 leading-tight">The Architect's Gambit: Community Building</h2>
+<p class="font-label-sm text-label-sm font-normal text-on-surface-variant/70 leading-relaxed mb-6 flex-grow">
+                            Redefining the social contract within the NSUT ecosystem through cooperative game mechanics.
+                        </p>
+<div class="flex items-center gap-4 pt-4 border-t border-outline-variant/10">
+<div class="w-6 h-6 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="font-label-sm text-label-sm text-primary">A</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant italic">Ananya Iyer</span>
+</div>
+</div>
+</article>
+<!-- Placard Card 3 -->
+<article class="placard-card group flex flex-col border border-outline-variant/10 p-1 bg-surface-container-lowest">
+<div class="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A modern architectural shot of a brutalist concrete building against a stormy, dark blue sky. Strips of warm light escape through narrow windows, creating a sharp contrast. The image is minimalist yet powerful, evoking a sense of institutional strength and hidden knowledge." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute top-4 right-4 bg-background/80 backdrop-blur-md p-2 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">diamond</span>
+</div>
+</div>
+<div class="p-8 flex flex-col h-full bg-surface-container-low border-t border-outline-variant/10">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Economy</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-50">02 Oct 2024</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background mb-4 leading-tight">Liquidity Traps and Strategic Reserves</h2>
+<p class="font-label-sm text-label-sm font-normal text-on-surface-variant/70 leading-relaxed mb-6 flex-grow">
+                            An investigation into the psychological barriers of resource allocation in competitive environments.
+                        </p>
+<div class="flex items-center gap-4 pt-4 border-t border-outline-variant/10">
+<div class="w-6 h-6 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="font-label-sm text-label-sm text-primary">R</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant italic">Rohan Verma</span>
+</div>
+</div>
+</article>
+<!-- Featured Large Card -->
+<article class="md:col-span-2 lg:col-span-3 flex flex-col md:flex-row border border-outline-variant/10 p-1 bg-surface-container-lowest overflow-hidden">
+<div class="md:w-3/5 relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 h-96 md:h-auto">
+<img class="w-full h-full object-cover" data-alt="An expansive view of an ancient library at night, with towering shelves of books and a single desk illuminated by a green banker's lamp. The perspective is symmetric and imposing. The atmosphere is quiet, dark, and scholarly, filled with deep navy blues, rich mahogany, and bright emerald green accents." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="md:w-2/5 p-12 flex flex-col justify-center bg-surface-container-low border-t md:border-t-0 md:border-l border-outline-variant/10">
+<div class="inline-flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-caps text-label-caps tracking-widest uppercase">Editor's Choice</span>
+</div>
+<h2 class="font-headline-xl text-headline-lg text-on-background mb-6 leading-tight italic">The Philosophy of the Perfect Move</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 opacity-80 leading-relaxed">
+                            Does the 'perfect move' exist outside of pure mathematics? We delve into the intersection of intuition, probability, and the burden of absolute strategy.
+                        </p>
+<button class="w-fit px-8 py-4 bg-primary text-on-primary font-label-caps text-label-caps tracking-widest uppercase hover:opacity-90 transition-all Active:scale-95">Read the Full Thesis</button>
+</div>
+</article>
+</div>
+</section>
+<!-- Newsletter / Journal Subscription -->
+<section class="bg-surface-container-lowest py-24 border-y border-outline-variant/10">
+<div class="max-w-2xl mx-auto px-margin-mobile text-center">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Receive the Weekly Summary</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-10 opacity-70">
+                    The most critical moves of the week, distilled and delivered to your secure terminal. No fluff. Only strategy.
+                </p>
+<div class="flex flex-col md:flex-row gap-4">
+<input class="flex-grow bg-transparent border-b border-outline-variant/50 py-4 font-label-caps text-label-caps text-on-surface focus:border-primary transition-colors outline-none px-2" placeholder="official@nsut.ac.in" type="email"/>
+<button class="px-10 py-4 border border-primary text-primary font-label-caps text-label-caps tracking-widest uppercase hover:bg-primary/10 transition-all">Authenticate</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-margin-desktop py-12 max-w-max-width mx-auto gap-gutter">
+<div class="font-label-caps text-label-caps text-primary opacity-50 uppercase tracking-widest">IGTS Archive System</div>
+<div class="flex gap-8 my-8 md:my-0">
+<a class="text-on-surface-variant hover:text-primary transition-all underline underline-offset-4 font-body-md text-body-md italic" href="#">The Ledger</a>
+<a class="text-on-surface-variant hover:text-primary transition-all underline underline-offset-4 font-body-md text-body-md italic" href="#">Constitutions</a>
+<a class="text-on-surface-variant hover:text-primary transition-all underline underline-offset-4 font-body-md text-body-md italic" href="#">Archives</a>
+<a class="text-on-surface-variant hover:text-primary transition-all underline underline-offset-4 font-body-md text-body-md italic" href="#">Private Access</a>
+</div>
+<p class="font-body-md text-body-md italic text-on-surface-variant opacity-60">
+                © 2024 Indian Game Theory Society. Every move reveals something.
+            </p>
+</div>
+</footer>
+<!-- Compose FAB (Simulated) -->
+<div class="fixed bottom-12 right-12 z-[60] group">
+<div class="absolute -top-12 right-0 bg-surface-container-high border border-outline-variant/20 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none mb-2 whitespace-nowrap">
+<span class="font-label-caps text-label-caps text-primary">Member Action: Compose Article</span>
+</div>
+<button class="w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 0, 'wght' 400;">edit_note</span>
+</button>
+</div>
+<!-- Decorative Suit Icons for Depth -->
+<div class="fixed -bottom-20 -left-20 opacity-[0.03] pointer-events-none select-none -z-10 text-[400px] text-on-surface">♣</div>
+<div class="fixed -top-20 -right-20 opacity-[0.03] pointer-events-none select-none -z-10 text-[400px] text-on-surface">♦</div>
+<script>
+        // Simple filter interaction simulation
+        const filterChips = document.querySelectorAll('.filter-chip');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                filterChips.forEach(c => {
+                    c.classList.remove('active', 'text-primary');
+                    c.classList.add('text-on-surface-variant');
+                });
+                chip.classList.add('active', 'text-primary');
+                chip.classList.remove('text-on-surface-variant');
+                
+                // Add a small shimmer effect to cards when filtered
+                const cards = document.querySelectorAll('.placard-card');
+                cards.forEach(card => {
+                    card.style.opacity = '0.5';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                    }, 300);
+                });
+            });
+        });
+
+        // Micro-interaction for the FAB
+        const fab = document.querySelector('button.w-16.h-16');
+        fab.addEventListener('mouseenter', () => {
+            fab.querySelector('span').style.fontVariationSettings = "'FILL' 1, 'wght' 400";
+        });
+        fab.addEventListener('mouseleave', () => {
+            fab.querySelector('span').style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+        });
+    </script>
+</body></html>
