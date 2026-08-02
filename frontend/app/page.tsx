@@ -36,58 +36,82 @@ export default function Home() {
 
         {/* Section 2 — About */}
         <section className="flex h-screen snap-start snap-always items-center justify-center px-6 text-center md:px-8">
-          <Placard eyebrow="Who we are">
-            <h2 className="font-serif text-4xl font-semibold text-white md:text-6xl">
-              About IGTS
-            </h2>
+          <Link href="/about#about" className="group block">
+            <Placard eyebrow="Who we are">
+              <h2 className="font-serif text-4xl font-semibold text-white transition group-hover:text-gold-light md:text-6xl">
+                About IGTS
+              </h2>
 
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              A student-led community exploring how strategic thinking shapes
-              economics, technology, mathematics, and everyday decisions.
-            </p>
-          </Placard>
+              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+                A student-led community exploring how strategic thinking shapes
+                economics, technology, mathematics, and everyday decisions.
+              </p>
+
+              <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-gold/70 transition group-hover:text-gold">
+                Read more &rarr;
+              </p>
+            </Placard>
+          </Link>
         </section>
 
         {/* Section 3 — What we do */}
         <section className="flex h-screen snap-start snap-always items-center justify-center px-6 text-center md:px-8">
-          <Placard eyebrow="Our work">
-            <h2 className="font-serif text-4xl font-semibold text-white md:text-6xl">
-              What We Do
-            </h2>
+          <Link href="/about#what-we-do" className="group block">
+            <Placard eyebrow="Our work">
+              <h2 className="font-serif text-4xl font-semibold text-white transition group-hover:text-gold-light md:text-6xl">
+                What We Do
+              </h2>
 
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              We learn, discuss, research, build games, and explore strategic
-              ideas across disciplines.
-            </p>
-          </Placard>
+              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+                We learn, discuss, research, build games, and explore strategic
+                ideas across disciplines.
+              </p>
+
+              <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-gold/70 transition group-hover:text-gold">
+                Read more &rarr;
+              </p>
+            </Placard>
+          </Link>
         </section>
 
         {/* Section 4 — Explore game theory */}
         <section className="flex h-screen snap-start snap-always items-center justify-center px-6 text-center md:px-8">
-          <Placard eyebrow="Think strategically">
-            <h2 className="font-serif text-4xl font-semibold text-white md:text-6xl">
-              Explore Game Theory
-            </h2>
+          <Link href="/about#game-theory" className="group block">
+            <Placard eyebrow="Think strategically">
+              <h2 className="font-serif text-4xl font-semibold text-white transition group-hover:text-gold-light md:text-6xl">
+                Explore Game Theory
+              </h2>
 
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              From classic dilemmas to auctions, equilibria, and interactive
-              strategic games.
-            </p>
-          </Placard>
+              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+                From classic dilemmas to auctions, equilibria, and interactive
+                strategic games.
+              </p>
+
+              <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-gold/70 transition group-hover:text-gold">
+                Read more &rarr;
+              </p>
+            </Placard>
+          </Link>
         </section>
 
         {/* Section 5 — Events & achievements */}
         <section className="flex h-screen snap-start snap-always items-center justify-center px-6 text-center md:px-8">
-          <Placard eyebrow="Beyond theory">
-            <h2 className="font-serif text-4xl font-semibold text-white md:text-6xl">
-              Events &amp; Achievements
-            </h2>
+          <Link href="/about#events" className="group block">
+            <Placard eyebrow="Beyond theory">
+              <h2 className="font-serif text-4xl font-semibold text-white transition group-hover:text-gold-light md:text-6xl">
+                Events &amp; Achievements
+              </h2>
 
-            <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
-              Workshops, competitions, research discussions, collaborations,
-              and milestones from our community.
-            </p>
-          </Placard>
+              <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+                Workshops, competitions, research discussions, collaborations,
+                and milestones from our community.
+              </p>
+
+              <p className="mt-6 text-[11px] uppercase tracking-[0.3em] text-gold/70 transition group-hover:text-gold">
+                Read more &rarr;
+              </p>
+            </Placard>
+          </Link>
         </section>
 
         {/* Section 6 — Explore / CTA */}

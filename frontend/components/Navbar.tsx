@@ -53,12 +53,12 @@ export default function Navbar() {
               </Link>
             );
           })}
-          {status !== "unauthenticated" && status !== "loading" ? (
+          {isMember ? (
             <button onClick={() => void logout()} className="text-xs uppercase tracking-[0.2em] text-gold/70 transition hover:text-gold">
               Log Out {user?.display_name ? `(${user.display_name})` : ""}
             </button>
           ) : (
-            <Link href="/entry" className="text-xs uppercase tracking-[0.2em] text-gold/70 transition hover:text-gold">Enter</Link>
+            <Link href="/entry" className="text-xs uppercase tracking-[0.2em] text-gold/70 transition hover:text-gold">Admin Access</Link>
           )}
         </div>
         <button type="button" onClick={() => setOpen((value) => !value)} aria-label="Toggle menu" aria-expanded={open} className="flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden">
@@ -73,10 +73,10 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          {status !== "unauthenticated" && status !== "loading" ? (
+          {isMember ? (
             <button onClick={() => void logout()} className="border-b border-white/5 py-3 text-left text-xs uppercase tracking-[0.2em] text-gold/70 transition hover:text-gold">Log Out</button>
           ) : (
-            <Link href="/entry" onClick={() => setOpen(false)} className="border-b border-white/5 py-3 text-xs uppercase tracking-[0.2em] text-gold/70">Enter</Link>
+            <Link href="/entry" onClick={() => setOpen(false)} className="border-b border-white/5 py-3 text-xs uppercase tracking-[0.2em] text-gold/70">Admin Access</Link>
           )}
         </div>
       </div>

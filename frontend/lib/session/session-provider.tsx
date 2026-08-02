@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { clearStoredToken, getStoredToken } from "@/lib/api/client";
-import { getMe, logout as logoutRequest } from "@/lib/api/auth";
+import { enterAsVisitor, getMe, logout as logoutRequest } from "@/lib/api/auth";
 import type { AuthUser } from "@/lib/api/types";
 
 type SessionStatus = "loading" | "authenticated" | "visitor" | "unauthenticated";
@@ -25,11 +25,20 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   const refreshSession = useCallback(async () => {
-    const token = getStoredToken();
+    let token = getStoredToken();
+
     if (!token) {
-      setUser(null);
-      setStatus("unauthenticated");
-      return;
+      // No prior session: browsing defaults to visitor access automatically,
+      // no explicit "enter as visitor" step required. Member/admin login
+      // remains available separately via /entry.
+      try {
+        const session = await enterAsVisitor();
+        token = session.token;
+      } catch {
+        setUser(null);
+        setStatus("unauthenticated");
+        return;
+      }
     }
 
     try {
@@ -74,4 +83,3 @@ export function useSession() {
   if (!value) throw new Error("useSession must be used within SessionProvider");
   return value;
 }
-
