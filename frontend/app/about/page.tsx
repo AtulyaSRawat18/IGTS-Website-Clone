@@ -21,19 +21,10 @@ function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) 
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen bg-navy px-6 pb-32 pt-32 md:px-8">
-      <div className="mx-auto max-w-3xl text-center">
-        <p className="text-xs uppercase tracking-[0.45em] text-gold">The Full Story</p>
-        <h1 className="mt-4 font-serif text-4xl font-semibold text-white md:text-7xl">About IGTS</h1>
-        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/72 md:text-lg">
-          Everything the homepage only gestures at &mdash; who we are, what we build, the ideas we study,
-          and the milestones we&apos;ve reached along the way.
-        </p>
-      </div>
-
+    <main className="relative min-h-screen bg-navy px-6 pb-32 pt-20 md:px-8 md:pt-24">
       {/* About */}
-      <section id="about" className="mx-auto mt-28 max-w-4xl scroll-mt-28 border-t border-gold/15 pt-16">
-        <SectionHeading eyebrow="Who we are" title="About IGTS" />
+      <section id="about" className="mx-auto max-w-4xl scroll-mt-28">
+        <SectionHeading eyebrow="Welcome to the realm of IGTS" title="About IGTS" />
         <div className="mx-auto max-w-2xl space-y-5 text-base leading-relaxed text-white/78 md:text-lg">
           <p>
             The Indian Game Theory Society (IGTS) is a student-led community at NSUT exploring how
