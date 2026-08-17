@@ -1,60 +1,19 @@
-"use client";
-
+﻿"use client";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { getActiveGames } from "@/lib/api/games";
 import type { Game } from "@/lib/api/types";
 import { isSafeUrl } from "@/lib/safe-html";
-import { EmptyState, ErrorState, LoadingSkeleton, PublicPageShell, StatusChip, TacticalCard } from "@/components/ui/states";
-
+import { EmptyState, ErrorState, LoadingSkeleton } from "@/components/ui/states";
 export default function GameLabPage() {
-  const [games, setGames] = useState<Game[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [difficulty, setDifficulty] = useState("all");
-
-  const load = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await getActiveGames();
-      setGames(data.games || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load games");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => { void load(); }, []);
-  const difficulties = useMemo(() => ["all", ...Array.from(new Set(games.map((game) => game.difficulty).filter((item): item is string => Boolean(item))))], [games]);
-  const visible = difficulty === "all" ? games : games.filter((game) => game.difficulty === difficulty);
-
-  return (
-    <PublicPageShell eyebrow="Experimental Sector" title="The Game Lab" intro="A tactical directory of games, simulations, auctions, coordination problems, and strategic experiments.">
-      <div className="mt-10 flex flex-wrap gap-3">
-        {difficulties.map((item) => <button key={item} onClick={() => setDifficulty(item)} className={`border px-4 py-2 text-xs uppercase tracking-[0.18em] ${difficulty === item ? "border-gold bg-gold/10 text-gold" : "border-white/12 text-white/60 hover:border-gold/40"}`}>{item}</button>)}
-      </div>
-      {loading && <LoadingSkeleton />}
-      {error && <ErrorState message={error} onRetry={load} />}
-      {!loading && !error && visible.length === 0 && <EmptyState title="No active experiments." body="The lab has no active games in this classification yet." />}
-      <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {visible.map((game) => (
-          <TacticalCard key={game._id} className="group relative overflow-hidden">
-            <div className="absolute inset-0 opacity-0 transition group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_0%,rgba(168,132,47,0.14),transparent_55%)]" />
-            <div className="relative">
-              <div className="mb-5 flex flex-wrap gap-2"><StatusChip>{game.difficulty || "Initiate"}</StatusChip><StatusChip tone="muted">{game.game_type || "Strategy"}</StatusChip></div>
-              <h2 className="font-serif text-3xl text-white">{game.name}</h2>
-              <p className="mt-3 text-sm leading-6 text-white/62">{game.tagline || game.description || "A strategic experiment from the IGTS table."}</p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link href={`/game-lab/${game.slug}`} className="border border-gold/40 px-4 py-2 text-xs uppercase tracking-[0.2em] text-gold">View Details</Link>
-                {isSafeUrl(game.play_url) && <a href={game.play_url} target="_blank" rel="noreferrer" className="bg-gold px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-navy">Play</a>}
-              </div>
-            </div>
-          </TacticalCard>
-        ))}
-      </div>
-    </PublicPageShell>
-  );
+ const [games,setGames]=useState<Game[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState<string|null>(null),[difficulty,setDifficulty]=useState("all"),[domain,setDomain]=useState("all"),[query,setQuery]=useState("");
+ const load=async()=>{setLoading(true);setError(null);try{setGames((await getActiveGames()).games||[])}catch(err){setError(err instanceof Error?err.message:"Could not load games")}finally{setLoading(false)}}; useEffect(()=>{void load()},[]);
+ const difficulties=useMemo(()=>["all",...Array.from(new Set(games.map(g=>g.difficulty).filter((x):x is string=>Boolean(x))))],[games]); const domains=useMemo(()=>["all",...Array.from(new Set(games.map(g=>g.game_type).filter((x):x is string=>Boolean(x))))],[games]);
+ const visible=games.filter(g=>(difficulty==="all"||g.difficulty===difficulty)&&(domain==="all"||g.game_type===domain)&&`${g.name} ${g.tagline||""} ${g.description||""} ${g.tags?.join(" ")||""}`.toLowerCase().includes(query.trim().toLowerCase()));
+ return <main className="relative min-h-screen overflow-hidden bg-[#11131d] px-5 pb-24 pt-32 text-[#e1e1f0] md:px-10"><span className="pointer-events-none absolute -right-12 top-24 font-serif text-[20rem] leading-none text-[#ebc166]/[.035]">♦</span><span className="pointer-events-none absolute bottom-0 -left-8 font-serif text-[17rem] leading-none text-[#ebc166]/[.035]">♣</span><div className="relative mx-auto max-w-6xl">
+ <header className="flex flex-col gap-8 border-b border-[#4e4637]/25 pb-10 lg:flex-row lg:items-end lg:justify-between"><div><p className="mb-3 text-[11px] font-semibold uppercase tracking-[.22em] text-[#ebc166]">⌬ The Laboratory</p><h1 className="font-serif text-5xl font-bold md:text-7xl">Interactive Experiments</h1><p className="mt-5 max-w-3xl font-serif text-lg italic leading-8 text-[#d1c5b2]/80 md:text-xl">“Every move reveals something.” Explore the computational limits of strategic thought through our curated catalog of game-theoretic simulations.</p></div><div className="shrink-0 border border-[#ebc166]/30 px-5 py-3 text-[10px] uppercase tracking-[.2em] text-[#ebc166]">{games.length} active experiments</div></header>
+ <section className="mt-10 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end"><div className="flex flex-col gap-7 md:flex-row md:items-end"><div><p className="mb-3 text-[10px] uppercase tracking-[.2em] text-[#ebc166]/65">Difficulty</p><div className="flex flex-wrap gap-2">{difficulties.map(item=><button key={item} onClick={()=>setDifficulty(item)} className={`border px-4 py-2 text-[10px] uppercase tracking-[.16em] ${difficulty===item?"border-[#ebc166] bg-[#ebc166]/5 text-[#ebc166]":"border-[#4e4637]/50 text-[#d1c5b2]/65"}`}>{item==="all"?"All levels":item}</button>)}</div></div><label className="min-w-48"><span className="mb-3 block text-[10px] uppercase tracking-[.2em] text-[#ebc166]/65">Domain</span><select value={domain} onChange={e=>setDomain(e.target.value)} className="w-full border-0 border-b border-[#4e4637]/60 bg-transparent py-2 text-sm outline-none">{domains.map(item=><option key={item} value={item} className="bg-[#11131d]">{item==="all"?"All domains":item}</option>)}</select></label></div><label className="relative block min-w-72 border-b border-[#4e4637]/60"><span className="absolute left-0 top-2 text-[#ebc166]/55">⌕</span><span className="sr-only">Filter by keyword</span><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Filter by keyword..." className="w-full bg-transparent py-2 pl-7 text-sm outline-none"/></label></section>
+ {loading&&<LoadingSkeleton label="Preparing experiments..."/>}{error&&<ErrorState message={error} onRetry={load}/>} {!loading&&!error&&!visible.length&&<EmptyState title="No matching experiments." body="Try another difficulty, domain, or keyword."/>}
+ <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{visible.map((game,i)=><article key={game._id} className="group flex min-h-[420px] flex-col overflow-hidden border border-[#4e4637]/25 bg-[#1d1f2a]/65 transition hover:-translate-y-1 hover:border-[#ebc166]/40"><div className="relative h-52 overflow-hidden bg-[radial-gradient(circle_at_30%_20%,rgba(235,193,102,.22),transparent_40%),linear-gradient(145deg,#282934,#0c0e18)]">{game.thumbnail_url&&<img src={game.thumbnail_url} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-105"/>}<div className="absolute inset-0 bg-gradient-to-t from-[#11131d]/65 to-transparent"/><span className="absolute right-4 top-4 border border-[#ebc166]/50 bg-[#11131d]/80 px-3 py-1.5 text-[10px] uppercase tracking-[.16em] text-[#ebc166]">{["♦","♥","♠","♣"][i%4]} {game.difficulty||"Initiate"}</span></div><div className="flex flex-1 flex-col p-7"><p className="text-[10px] font-semibold uppercase tracking-[.18em] text-[#d1c5b2]/65">{game.game_type||"Strategic simulation"}</p><h2 className="mt-4 font-serif text-3xl font-semibold">{game.name}</h2><p className="mt-4 font-serif italic leading-7 text-[#d1c5b2]/70">{game.tagline||game.description||"A strategic experiment from the IGTS table."}</p><div className="mt-auto flex items-center justify-between gap-4 pt-8"><Link href={`/game-lab/${game.slug}`} className="text-[10px] font-semibold uppercase tracking-[.18em] text-[#ebc166]">View dossier →</Link>{isSafeUrl(game.play_url)&&<a href={game.play_url} target="_blank" rel="noreferrer" className="bg-[#ebc166] px-4 py-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#3f2e00]">Initialize</a>}</div></div></article>)}</div>
+ </div></main>;
 }
-

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="We Become What We Behold game cover">
+  <rect width="1200" height="720" fill="#10131d"/>
+  <rect x="140" y="115" width="920" height="490" rx="24" fill="#1d1f2a" stroke="#ebc166" stroke-width="8"/>
+  <rect x="205" y="180" width="360" height="260" fill="#ebc166" opacity=".92"/>
+  <rect x="625" y="180" width="370" height="55" fill="#f7ecd0"/>
+  <rect x="625" y="270" width="300" height="36" fill="#d1c5b2" opacity=".7"/>
+  <rect x="625" y="335" width="330" height="36" fill="#d1c5b2" opacity=".55"/>
+  <circle cx="320" cy="310" r="58" fill="#10131d"/>
+  <circle cx="450" cy="310" r="58" fill="#10131d"/>
+  <path d="M290 390c80 45 150 45 230 0" fill="none" stroke="#10131d" stroke-width="16"/>
+  <text x="600" y="680" fill="#f7ecd0" font-family="Georgia, serif" font-size="58" font-weight="700" text-anchor="middle">WE BECOME WHAT WE BEHOLD</text>
+</svg>

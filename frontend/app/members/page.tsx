@@ -3,22 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { getMembers } from "@/lib/api/members";
 import type { MemberProfile } from "@/lib/api/types";
-import { isSafeUrl } from "@/lib/safe-html";
-import { EmptyState, ErrorState, LoadingSkeleton, PublicPageShell, StatusChip, TacticalCard } from "@/components/ui/states";
-
-const suitMap: Record<string, string> = {
-  "Core Committee": "Spades",
-  "Third Year": "Hearts",
-  "Second Year": "Diamonds",
-  "First Year": "Clubs",
-  Alumni: "Archive",
-};
+import { EmptyState, ErrorState, LoadingSkeleton } from "@/components/ui/states";
+import { MembersHouses } from "@/components/members/MembersHouses";
+import { fallbackMembers, toDisplayMember } from "@/components/members/memberHousesData";
 
 export default function MembersPage() {
   const [members, setMembers] = useState<MemberProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [year, setYear] = useState("all");
 
   const load = async () => {
     setLoading(true);
@@ -34,38 +26,34 @@ export default function MembersPage() {
   };
 
   useEffect(() => { void load(); }, []);
-  const years = useMemo(() => ["all", ...Array.from(new Set(members.map((member) => member.year).filter((item): item is string => Boolean(item))))], [members]);
-  const visible = year === "all" ? members : members.filter((member) => member.year === year);
+
+  const displayMembers = useMemo(() => {
+    const live = members.map(toDisplayMember);
+    const liveNames = new Set(live.map((member) => member.display_name.trim().toLowerCase()));
+    const supplemental = fallbackMembers().filter((member) => !liveNames.has(member.display_name.trim().toLowerCase()));
+    return [...live, ...supplemental];
+  }, [members]);
 
   return (
-    <PublicPageShell eyebrow="Society Roster" title="The Players" intro="A ceremonial deck of members, committees, and strategic roles inside IGTS.">
-      <div className="mt-10 flex flex-wrap gap-3">
-        {years.map((item) => <button key={item} onClick={() => setYear(item)} className={`border px-4 py-2 text-xs uppercase tracking-[0.18em] ${year === item ? "border-gold bg-gold/10 text-gold" : "border-white/12 text-white/60 hover:border-gold/40"}`}>{item}</button>)}
-      </div>
-      {loading && <LoadingSkeleton />}
-      {error && <ErrorState message={error} onRetry={load} />}
-      {!loading && !error && visible.length === 0 && <EmptyState title="No cards on the table." body="The society roster has not been published yet." />}
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map((member) => (
-          <TacticalCard key={member._id} className="relative overflow-hidden">
-            <div className="absolute right-4 top-4 text-5xl text-gold/10">{member.year === "First Year" ? "C" : member.year === "Second Year" ? "D" : member.year === "Third Year" ? "H" : "S"}</div>
-            <div className="relative">
-              <div className="mb-5 h-28 w-28 border border-gold/30 bg-white/5 object-cover">
-                {member.pfp_url ? <img src={member.pfp_url} alt="" className="h-full w-full object-cover" /> : <div className="flex h-full items-center justify-center font-serif text-4xl text-gold">{member.display_name.slice(0, 1)}</div>}
-              </div>
-              <StatusChip>{member.year ? suitMap[member.year] || member.year : "Member"}</StatusChip>
-              <h2 className="mt-4 font-serif text-3xl text-white">{member.display_name}</h2>
-              <p className="mt-1 text-sm uppercase tracking-[0.18em] text-gold/70">{member.designation || "IGTS Member"}</p>
-              <p className="mt-4 min-h-20 text-sm leading-6 text-white/62">{member.bio || "A player in the society's strategic formation."}</p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                {isSafeUrl(member.linkedin_url) && <a href={member.linkedin_url} target="_blank" rel="noreferrer" className="text-xs uppercase tracking-[0.2em] text-gold">LinkedIn</a>}
-                {isSafeUrl(member.personal_site) && <a href={member.personal_site} target="_blank" rel="noreferrer" className="text-xs uppercase tracking-[0.2em] text-gold">Personal Site</a>}
-              </div>
+    <main className="min-h-screen bg-[#0a0c16] pb-24 pt-[69px] text-[#f4efe4]">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(168,132,47,0.16),transparent_30%),radial-gradient(circle_at_80%_15%,rgba(111,88,201,0.12),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[length:auto,auto,34px_34px]" />
+      <section className="relative mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-16">
+        <header className="border-y border-[#a8842f]/35 py-8">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#c9a969]">Members / Houses / Society Archive</p>
+          <div className="mt-5 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-end">
+            <div>
+              <h1 className="font-serif text-6xl font-semibold leading-none tracking-tight md:text-8xl">Four Years.</h1>
+              <h2 className="font-serif text-5xl font-semibold leading-none tracking-tight text-[#d1c5b2]/72 md:text-7xl">One House.</h2>
             </div>
-          </TacticalCard>
-        ))}
-      </div>
-    </PublicPageShell>
+            <p className="max-w-xl text-lg leading-8 text-[#d1c5b2]/72">Meet the people behind IGTS through a year-wise house archive: a collectible deck that opens into the members, roles, and voices shaping the society.</p>
+          </div>
+        </header>
+
+        {loading && <LoadingSkeleton label="Preparing the house deck..." />}
+        {error && <ErrorState message={error} onRetry={load} />}
+        {!loading && !error && !displayMembers.length && <EmptyState title="No cards on the table." body="The society roster has not been published yet." />}
+        {!loading && !error && !!displayMembers.length && <MembersHouses members={displayMembers} />}
+      </section>
+    </main>
   );
 }
-

@@ -8,7 +8,9 @@
     "scripts":  {
                     "dev":  "node app.js",
                     "start":  "node app.js",
-                    "check":  "node --check app.js"
+                    "check":  "node --check app.js",
+                    "seed:games":  "node seedShowcaseGames.js",
+                    "seed:articles":  "node seedShowcaseArticles.js"
                 },
     "dependencies":  {
                          "cors":  "^2.8.5",

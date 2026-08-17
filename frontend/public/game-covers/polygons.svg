@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="Polygons game cover">
+  <rect width="1200" height="720" fill="#10131d"/>
+  <g opacity=".95">
+    <polygon points="260,170 365,355 155,355" fill="#ebc166"/>
+    <rect x="460" y="190" width="160" height="160" fill="#f7ecd0"/>
+    <polygon points="810,145 930,235 885,380 735,380 690,235" fill="#6f58c9"/>
+    <rect x="230" y="455" width="135" height="135" fill="#f7ecd0"/>
+    <polygon points="575,430 690,615 460,615" fill="#ebc166"/>
+    <rect x="835" y="455" width="145" height="145" fill="#6f58c9"/>
+  </g>
+  <g fill="none" stroke="#ebc166" stroke-width="4" opacity=".35">
+    <path d="M260 355 540 270 810 250M300 522 575 522 905 528"/>
+  </g>
+  <text x="600" y="675" fill="#f7ecd0" font-family="Georgia, serif" font-size="82" font-weight="700" text-anchor="middle">POLYGONS</text>
+</svg>
