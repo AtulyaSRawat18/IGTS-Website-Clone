@@ -26,10 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth antialiased">
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-navy">
         <AppShell>{children}</AppShell>
       </body>
     </html>
   );
 }
+
+

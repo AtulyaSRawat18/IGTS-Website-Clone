@@ -37,6 +37,7 @@ export default function GameDetailPage() {
       {game && !loading && !error && (
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_280px]">
           <TacticalCard>
+            {game.thumbnail_url && <img src={game.thumbnail_url} alt="" className="mb-8 max-h-[420px] w-full object-cover" />}
             <div className="flex flex-wrap gap-2"><StatusChip>{game.difficulty || "Beginner"}</StatusChip><StatusChip tone="muted">{game.game_type || "Game"}</StatusChip></div>
             <h2 className="mt-6 font-serif text-3xl text-white">What this teaches</h2>
             <p className="mt-4 whitespace-pre-line leading-8 text-white/70">{game.description || "Rules and learning objectives will be added by the society member who owns this experiment."}</p>
@@ -50,3 +51,4 @@ export default function GameDetailPage() {
     </PublicPageShell>
   );
 }
+

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="Loopy game cover">
+  <rect width="1200" height="720" fill="#10131d"/>
+  <g fill="none" stroke="#ebc166" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M360 260c80-120 260-120 340 0"/>
+    <path d="M700 260c80 120-20 250-155 250"/>
+    <path d="M545 510c-155 0-245-130-185-250"/>
+    <path d="M694 258l-12-72 70 25"/>
+    <path d="M545 510l68 25-50 55"/>
+    <path d="M360 260l-22 68-50-52"/>
+  </g>
+  <circle cx="360" cy="260" r="54" fill="#f7ecd0"/>
+  <circle cx="700" cy="260" r="54" fill="#6f58c9"/>
+  <circle cx="545" cy="510" r="54" fill="#ebc166"/>
+  <text x="600" y="655" fill="#f7ecd0" font-family="Georgia, serif" font-size="88" font-weight="700" text-anchor="middle">LOOPY</text>
+</svg>

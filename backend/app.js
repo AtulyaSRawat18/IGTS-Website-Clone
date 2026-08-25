@@ -22,7 +22,7 @@ const allowedOrigins = process.env.CORS_ORIGIN
   : true;
 
 app.use(cors({ origin: allowedOrigins }));
-app.use(express.json());
+app.use(express.json({ limit: "6mb" }));
 app.use(attachUser);
 
 app.get("/", (req, res) => {

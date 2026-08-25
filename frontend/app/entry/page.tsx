@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { memberLogin } from "@/lib/api/auth";
+import { enterAsVisitor, memberLogin } from "@/lib/api/auth";
 import { useSession } from "@/lib/session/use-session";
 
 function safeRedirect(value: string | null, fallback: string) {
@@ -13,22 +11,28 @@ function safeRedirect(value: string | null, fallback: string) {
 }
 
 export default function EntryPage() {
-  return (
-    <Suspense fallback={null}>
-      <EntryPageInner />
-    </Suspense>
-  );
-}
-
-function EntryPageInner() {
   const searchParams = useSearchParams();
   const { refreshSession } = useSession();
   const [socId, setSocId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<"member" | null>(null);
+  const [loading, setLoading] = useState<"visitor" | "member" | null>(null);
   const next = searchParams.get("next");
+
+  const handleVisitorLogin = async () => {
+    setLoading("visitor");
+    setError(null);
+    try {
+      await enterAsVisitor();
+      await refreshSession();
+      window.location.href = safeRedirect(next, "/");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Failed to enter as visitor");
+    } finally {
+      setLoading(null);
+    }
+  };
 
   const handleMemberLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -52,13 +56,6 @@ function EntryPageInner() {
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,6,10,0.38),rgba(5,6,10,0.2)_35%,rgba(5,6,10,0.86)_100%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(168,132,47,0.11)_1px,transparent_1px)] bg-[length:34px_34px] opacity-45" />
 
-      <Link
-        href={safeRedirect(next, "/")}
-        className="absolute left-6 top-6 z-20 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/60 transition hover:text-gold md:left-8 md:top-8"
-      >
-        &larr; Back to site
-      </Link>
-
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col justify-center gap-8">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <div className="relative mb-6 flex h-32 w-32 items-center justify-center rounded-full border border-gold/40 bg-white shadow-[0_0_80px_rgba(168,132,47,0.34)] md:h-40 md:w-40">
@@ -66,16 +63,25 @@ function EntryPageInner() {
             <span className="absolute inset-[-10px] rounded-full border border-gold/20" />
           </div>
           <p className="text-xs uppercase tracking-[0.45em] text-gold">IGTS NSUT</p>
-          <h1 className="mt-4 font-serif text-4xl text-white md:text-7xl">Command Access</h1>
+          <h1 className="mt-4 font-serif text-4xl text-white md:text-7xl">Enter the Chamber</h1>
           <p className="mt-5 max-w-2xl text-sm leading-7 text-white/72 md:text-base">
-            You&apos;re already browsing the archive as a visitor &mdash; no sign-in required. Society members can sign in below to command the Studio.
+            The public website opens only after you take a seat at the board. Enter as a visitor to explore, or sign in as a society member to command the Studio.
           </p>
         </div>
 
-        <div className="mx-auto grid w-full max-w-2xl gap-5">
+        <div className="mx-auto grid w-full max-w-5xl gap-5 md:grid-cols-2">
+          <div className="border border-gold/25 bg-[#05060a]/78 p-6 shadow-[0_24px_90px_rgba(0,0,0,0.55)] backdrop-blur-md">
+            <p className="text-xs uppercase tracking-[0.28em] text-gold">Visitor Pathway</p>
+            <h2 className="mt-4 font-serif text-3xl text-white">Observe the Archive</h2>
+            <p className="mt-4 leading-7 text-white/66">Read the Ledger, inspect active games, meet the roster, and follow recruitment signals without management controls.</p>
+            <button onClick={handleVisitorLogin} disabled={loading !== null} className="mt-8 w-full border border-gold/45 bg-gold/10 px-6 py-3 text-xs uppercase tracking-[0.2em] text-gold transition hover:bg-gold/20 disabled:opacity-50">
+              {loading === "visitor" ? "Opening..." : "Enter as Visitor"}
+            </button>
+          </div>
+
           <div className="border border-gold/25 bg-[#05060a]/82 p-6 shadow-[0_24px_90px_rgba(0,0,0,0.58)] backdrop-blur-md">
             <p className="text-xs uppercase tracking-[0.28em] text-gold">Member Login</p>
-            <h2 className="mt-4 font-serif text-3xl text-white">Society Sign-In</h2>
+            <h2 className="mt-4 font-serif text-3xl text-white">Command Access</h2>
             <form onSubmit={handleMemberLogin} className="mt-5 grid gap-4">
               {error && <div className="border border-crimson/50 bg-crimson/20 p-3 text-sm text-red-200">{error}</div>}
               <label className="grid gap-2 text-left">

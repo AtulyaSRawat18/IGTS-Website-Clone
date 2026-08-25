@@ -1,23 +1,9 @@
-"use client";
-
-import { useParams, useRouter } from "next/navigation";
+﻿"use client";
+import { useParams,useRouter } from "next/navigation";
 import { useState } from "react";
 import { updateBlog } from "@/lib/api/blogs";
 import { StudioShell } from "@/components/studio/StudioShell";
+import { ImageUpload } from "@/components/studio/ImageUpload";
 import { TacticalCard } from "@/components/ui/states";
-
-export default function EditBlogPage() {
-  const params = useParams<{ id: string }>();
-  const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
-  const submit = async (event: React.FormEvent) => {
-    event.preventDefault(); setSaving(true); setError(null);
-    try { await updateBlog(params.id, { ...(title ? { title } : {}), ...(content ? { content } : {}) }); router.push("/studio/blogs"); }
-    catch (err) { setError(err instanceof Error ? err.message : "Could not update blog. You may not own this record."); }
-    finally { setSaving(false); }
-  };
-  return <StudioShell title="Edit Ledger Entry" intro="Ownership is checked by the backend before saving. Leave a field blank to keep it unchanged."><TacticalCard><form onSubmit={submit} className="grid gap-4"><input className="border border-gold/20 bg-ink p-3 text-white" placeholder="New title" value={title} onChange={(e) => setTitle(e.target.value)} /><textarea className="min-h-64 border border-gold/20 bg-ink p-3 text-white" placeholder="Replacement rich HTML content" value={content} onChange={(e) => setContent(e.target.value)} />{error && <p className="text-red-200">{error}</p>}<button disabled={saving} className="bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-navy disabled:opacity-50">{saving ? "Saving..." : "Save Changes"}</button></form></TacticalCard></StudioShell>;
-}
+const field="border border-gold/20 bg-ink p-3 text-white outline-none focus:border-gold/60";
+export default function EditBlogPage(){const params=useParams<{id:string}>(),router=useRouter(),[error,setError]=useState<string|null>(null),[saving,setSaving]=useState(false),[body,setBody]=useState(""),[header,setHeader]=useState(""),[photo,setPhoto]=useState("");const submit=async(e:React.FormEvent)=>{e.preventDefault();setSaving(true);setError(null);try{await updateBlog(params.id,{...(header?{title:header}:{}),...(body?{content:body,read_time_mins:Math.max(1,Math.ceil(body.trim().split(/\s+/).length/220))}:{}),...(photo?{header_image_url:photo}:{})});router.push("/studio/blogs")}catch(err){setError(err instanceof Error?err.message:"Could not update Ledger entry. You may not own this record.")}finally{setSaving(false)}};return <StudioShell title="Edit Ledger Entry" intro="Change only the parts you want to replace."><TacticalCard><form onSubmit={submit} className="grid gap-6"><label className="grid gap-2 text-xs font-semibold uppercase tracking-[.18em] text-gold">New header<input className={field} value={header} onChange={e=>setHeader(e.target.value)}/></label><ImageUpload label="Replacement header photo" value={photo} onChange={setPhoto}/><label className="grid gap-2 text-xs font-semibold uppercase tracking-[.18em] text-gold">New body<textarea className={`${field} min-h-80 normal-case leading-7 tracking-normal`} placeholder="Leave blank to keep the current article body." value={body} onChange={e=>setBody(e.target.value)}/></label>{error&&<p className="text-red-200">{error}</p>}<button disabled={saving} className="bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-[.2em] text-navy disabled:opacity-50">{saving?"Saving...":"Save changes"}</button></form></TacticalCard></StudioShell>}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="Crowds game cover">
+  <rect width="1200" height="720" fill="#10131d"/>
+  <g stroke="#ebc166" stroke-width="3" opacity=".45">
+    <path d="M180 180 380 260 610 190 850 295 1030 180"/>
+    <path d="M260 520 450 390 650 500 870 365 1020 520"/>
+    <path d="M380 260 450 390M610 190 650 500M850 295 870 365"/>
+  </g>
+  <g fill="#f7ecd0">
+    <circle cx="180" cy="180" r="26"/><circle cx="380" cy="260" r="26"/><circle cx="610" cy="190" r="26"/>
+    <circle cx="850" cy="295" r="26"/><circle cx="1030" cy="180" r="26"/><circle cx="260" cy="520" r="26"/>
+    <circle cx="450" cy="390" r="26"/><circle cx="650" cy="500" r="26"/><circle cx="870" cy="365" r="26"/><circle cx="1020" cy="520" r="26"/>
+  </g>
+  <g font-family="Georgia, serif">
+    <text x="90" y="620" fill="#ebc166" font-size="78" font-weight="700">CROWDS</text>
+    <text x="95" y="666" fill="#d1c5b2" font-size="30">networks, contagions, group behaviour</text>
+  </g>
+</svg>

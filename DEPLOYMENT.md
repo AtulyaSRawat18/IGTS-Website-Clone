@@ -2,12 +2,13 @@
 
 ## Backend on Render
 
-Create a Render Web Service from the `backend` folder.
+Recommended: create a Render Blueprint from the repository root. The repo includes
+`render.yaml`, which points Render at the `backend` folder.
 
 Settings:
 - Runtime: Node
 - Root Directory: `backend`
-- Build Command: `npm install`
+- Build Command: `npm ci`
 - Start Command: `npm start`
 - Health Check Path: `/api/health`
 
@@ -17,7 +18,11 @@ Environment variables:
 - `CORS_ORIGIN`: your Vercel frontend URL, for example `https://igts.vercel.app`
 
 Database setup:
-1. Create a MongoDB Atlas cluster/database.\n2. Add `MONGODB_URI` on Render.\n3. Run `node seed.js` once from the backend folder with the same `MONGODB_URI`.
+1. Create a MongoDB Atlas cluster/database.
+2. Add `MONGODB_URI` on Render before the first deploy.
+3. Add the Render outbound IPs to MongoDB Atlas Network Access, or temporarily use `0.0.0.0/0` while developing.
+4. Run `node seed.js` once from the backend folder with the same `MONGODB_URI`.
+5. Run `node seedShowcaseGames.js` and `node seedShowcaseArticles.js` once if the showcase content is missing.
 
 Seeded member credentials come from `seed.js`:
 - `IGTS Admin` / `igts-admin-001`

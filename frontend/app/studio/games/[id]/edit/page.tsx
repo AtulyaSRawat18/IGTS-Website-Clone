@@ -1,18 +1,9 @@
-"use client";
-
-import { useParams, useRouter } from "next/navigation";
+﻿"use client";
+import { useParams,useRouter } from "next/navigation";
 import { useState } from "react";
 import { updateGame } from "@/lib/api/games";
 import { StudioShell } from "@/components/studio/StudioShell";
+import { ImageUpload } from "@/components/studio/ImageUpload";
 import { TacticalCard } from "@/components/ui/states";
-
-export default function EditGamePage() {
-  const params = useParams<{ id: string }>();
-  const router = useRouter();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
-  const submit = async (event: React.FormEvent) => { event.preventDefault(); setSaving(true); setError(null); try { await updateGame(params.id, { ...(name ? { name } : {}), ...(description ? { description } : {}) }); router.push("/studio/games"); } catch (err) { setError(err instanceof Error ? err.message : "Could not update game. You may not own this record."); } finally { setSaving(false); } };
-  return <StudioShell title="Edit Game" intro="Ownership is checked by the backend before saving. Leave a field blank to keep it unchanged."><TacticalCard><form onSubmit={submit} className="grid gap-4"><input className="border border-gold/20 bg-ink p-3 text-white" placeholder="New name" value={name} onChange={(e) => setName(e.target.value)} /><textarea className="min-h-40 border border-gold/20 bg-ink p-3 text-white" placeholder="New description" value={description} onChange={(e) => setDescription(e.target.value)} />{error && <p className="text-red-200">{error}</p>}<button disabled={saving} className="bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-navy disabled:opacity-50">{saving ? "Saving..." : "Save Changes"}</button></form></TacticalCard></StudioShell>;
-}
+const field="border border-gold/20 bg-ink p-3 text-white outline-none focus:border-gold/60";
+export default function EditGamePage(){const params=useParams<{id:string}>(),router=useRouter(),[name,setName]=useState(""),[description,setDescription]=useState(""),[photo,setPhoto]=useState(""),[error,setError]=useState<string|null>(null),[saving,setSaving]=useState(false);const submit=async(e:React.FormEvent)=>{e.preventDefault();setSaving(true);setError(null);try{await updateGame(params.id,{...(name?{name}:{}),...(description?{description}:{}),...(photo?{thumbnail_url:photo}:{})});router.push("/studio/games")}catch(err){setError(err instanceof Error?err.message:"Could not update game. You may not own this record.")}finally{setSaving(false)}};return <StudioShell title="Edit Game" intro="Change only the fields you want to replace."><TacticalCard><form onSubmit={submit} className="grid gap-6"><label className="grid gap-2 text-xs uppercase tracking-[.18em] text-gold">New game name<input className={field} value={name} onChange={e=>setName(e.target.value)}/></label><ImageUpload label="Replacement cover photo" value={photo} onChange={setPhoto}/><label className="grid gap-2 text-xs uppercase tracking-[.18em] text-gold">New description<textarea className={`${field} min-h-40 normal-case tracking-normal`} value={description} onChange={e=>setDescription(e.target.value)}/></label>{error&&<p className="text-red-200">{error}</p>}<button disabled={saving} className="bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-[.2em] text-navy disabled:opacity-50">{saving?"Saving...":"Save changes"}</button></form></TacticalCard></StudioShell>}
