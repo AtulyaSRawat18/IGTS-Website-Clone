@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { enterAsVisitor, memberLogin } from "@/lib/api/auth";
 import { useSession } from "@/lib/session/use-session";
 
@@ -10,7 +10,7 @@ function safeRedirect(value: string | null, fallback: string) {
   return value;
 }
 
-export default function EntryPage() {
+function EntryContent() {
   const searchParams = useSearchParams();
   const { refreshSession } = useSession();
   const [socId, setSocId] = useState("");
@@ -103,5 +103,13 @@ export default function EntryPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function EntryPage() {
+  return (
+    <Suspense fallback={null}>
+      <EntryContent />
+    </Suspense>
   );
 }
